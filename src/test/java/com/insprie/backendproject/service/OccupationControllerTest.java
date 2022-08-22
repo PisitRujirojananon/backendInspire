@@ -1,6 +1,7 @@
 package com.insprie.backendproject.service;
 
 import com.insprie.backendproject.entity.OccupationEntity;
+import com.insprie.backendproject.exception.OccupationException;
 import com.insprie.backendproject.model.OccupationEntityList;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ class OccupationControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    void testOccupationController() {
+    void testOccupationController() throws OccupationException {
 
         OccupationEntityList occupationEntityList = getDataTest();
         when(occupationService.getOccupations()).thenReturn(occupationEntityList);

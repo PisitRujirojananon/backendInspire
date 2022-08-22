@@ -1,5 +1,6 @@
 package com.insprie.backendproject.controller;
 
+import com.insprie.backendproject.exception.OccupationException;
 import com.insprie.backendproject.model.OccupationEntityList;
 import com.insprie.backendproject.service.OccupationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class OccupationController {
     OccupationService occupationService;
 
     @GetMapping("/occupations")
-    public ResponseEntity<OccupationEntityList> getOccupations() {
+    public ResponseEntity<OccupationEntityList> getOccupations() throws OccupationException {
         OccupationEntityList response = occupationService.getOccupations();
         return ResponseEntity.ok(response);
     }

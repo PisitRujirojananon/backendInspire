@@ -1,6 +1,7 @@
 package com.insprie.backendproject.service;
 
 import com.insprie.backendproject.entity.OccupationEntity;
+import com.insprie.backendproject.exception.OccupationException;
 import com.insprie.backendproject.model.OccupationEntityList;
 import com.insprie.backendproject.repository.OccupationRepository;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class OccupationServiceTest {
     OccupationService occupationService;
 
     @Test
-    void testOccupationService() {
+    void testOccupationService() throws OccupationException {
         List<OccupationEntity> occupationEntityList = getDataTest();
         when(occupationRepository.findAll()).thenReturn(occupationEntityList);
         OccupationEntityList result = occupationService.getOccupations();
