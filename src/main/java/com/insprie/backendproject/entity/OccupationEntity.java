@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Data
-@Entity(name = "OccupationDim")
+@Entity(name = "occupationdim")
 public class OccupationEntity {
 
     @Id
-    private int occupationId;
+    private int occupationid;
 
     @Column
-    private String occupationTitle;
+    private String occupationtitle;
 }
