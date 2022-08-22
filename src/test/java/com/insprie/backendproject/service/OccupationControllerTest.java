@@ -1,4 +1,4 @@
-package com.insprie.backendproject.occupation;
+package com.insprie.backendproject.service;
 
 import com.insprie.backendproject.entity.OccupationEntity;
 import com.insprie.backendproject.model.OccupationEntityList;
@@ -24,7 +24,7 @@ class OccupationControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    void testOccupationService() {
+    void testOccupationController() {
 
         OccupationEntityList occupationEntityList = getDataTest();
         when(occupationService.getOccupations()).thenReturn(occupationEntityList);

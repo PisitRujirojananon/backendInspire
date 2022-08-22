@@ -1,4 +1,4 @@
-package com.insprie.backendproject.occupation;
+package com.insprie.backendproject.service;
 
 import com.insprie.backendproject.model.OccupationEntityList;
 import com.insprie.backendproject.repository.OccupationRepository;
