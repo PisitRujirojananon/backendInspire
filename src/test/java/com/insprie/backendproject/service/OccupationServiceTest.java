@@ -1,15 +1,13 @@
 package com.insprie.backendproject.service;
 
-import com.insprie.backendproject.entity.OccupationEntity;
+import com.insprie.backendproject.entity.Occupation;
 import com.insprie.backendproject.exception.OccupationException;
-import com.insprie.backendproject.model.OccupationEntityList;
 import com.insprie.backendproject.repository.OccupationRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,28 +24,14 @@ public class OccupationServiceTest {
 
     @Test
     void testOccupationService() throws OccupationException {
-        List<OccupationEntity> occupationEntityList = getDataTest();
-        when(occupationRepository.findAll()).thenReturn(occupationEntityList);
-        OccupationEntityList result = occupationService.getOccupations();
-        assertEquals(3, result.getOccupationEntityList().size());
-    }
+        when(occupationRepository.findAll()).thenReturn(List.of(
+                new Occupation(1, "NAVY"),
+                new Occupation(2, "OFFICE"),
+                new Occupation(3, "CONSTRUCTION")
+        ));
 
-    public List<OccupationEntity> getDataTest() {
+        List<Occupation> result = occupationService.getOccupations();
 
-        List<OccupationEntity> occupationEntities = new ArrayList<>();
-        List<String> occupationName = new ArrayList<>();
-        occupationName.add("NAVY");
-        occupationName.add("OFFICE");
-        occupationName.add("CONSTRUCTION");
-        int couter = 0;
-
-        for (String item : occupationName) {
-            OccupationEntity occupationEntity = new OccupationEntity();
-            occupationEntity.setOccupationtitle(item);
-            occupationEntity.setOccupationid(couter++);
-            occupationEntities.add(occupationEntity);
-        }
-
-        return occupationEntities;
+        assertEquals(3, result.size());
     }
 }

@@ -1,54 +1,45 @@
 package com.insprie.backendproject.service;
 
-import com.insprie.backendproject.entity.OccupationEntity;
-import com.insprie.backendproject.exception.OccupationException;
-import com.insprie.backendproject.model.OccupationEntityList;
+import com.insprie.backendproject.controller.OccupationController;
+import com.insprie.backendproject.entity.Occupation;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@WebMvcTest(OccupationController.class)
 class OccupationControllerTest {
 
     @MockBean
     OccupationService occupationService;
 
     @Autowired
-    private TestRestTemplate testRestTemplate;
+    private MockMvc mockMvc;
 
     @Test
-    void testOccupationController() throws OccupationException {
+    void testOccupationController() throws Exception {
 
-        OccupationEntityList occupationEntityList = getDataTest();
-        when(occupationService.getOccupations()).thenReturn(occupationEntityList);
-        OccupationEntityList result = testRestTemplate.getForObject("/occupations", OccupationEntityList.class);
-        assertEquals(3, result.getOccupationEntityList().size());
-    }
+        when(occupationService.getOccupations()).thenReturn(List.of(
+                new Occupation(1, "NAVY"),
+                new Occupation(2, "OFFICE"),
+                new Occupation(3, "CONSTRUCTION")));
 
-    public OccupationEntityList getDataTest() {
-        OccupationEntityList occupationEntityList = new OccupationEntityList();
-        List<OccupationEntity> occupationEntities = new ArrayList<>();
-        List<String> occupationName = new ArrayList<>();
-        occupationName.add("NAVY");
-        occupationName.add("OFFICE");
-        occupationName.add("CONSTRUCTION");
-        int couter = 0;
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/occupations")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()", Matchers.is(3)))
+                .andExpect(jsonPath("$.[1].occupationtitle", Matchers.is("OFFICE")));
 
-        for (String item : occupationName) {
-            OccupationEntity occupationEntity = new OccupationEntity();
-            occupationEntity.setOccupationtitle(item);
-            occupationEntity.setOccupationid(couter++);
-            occupationEntities.add(occupationEntity);
-        }
-        occupationEntityList.setOccupationEntityList(occupationEntities);
-        return occupationEntityList;
     }
 }
