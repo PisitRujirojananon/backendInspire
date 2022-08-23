@@ -8,4 +8,4 @@ spring:
     hikari:
       schema: ProductMaster
     username: postgres
-    password: postgres
+    password: password
