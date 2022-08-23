@@ -30,16 +30,17 @@ class OccupationControllerTest {
     void testOccupationController() throws Exception {
 
         when(occupationService.getOccupations()).thenReturn(List.of(
-                new Occupation(1, "NAVY"),
-                new Occupation(2, "OFFICE"),
-                new Occupation(3, "CONSTRUCTION")));
+                new Occupation(1, "Navy"),
+                new Occupation(2, "Construction Worker"),
+                new Occupation(3, "Office Worker")
+        ));
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/occupations")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", Matchers.is(3)))
-                .andExpect(jsonPath("$.[1].occupationtitle", Matchers.is("OFFICE")));
+                .andExpect(jsonPath("$.[2].occupationtitle", Matchers.is("Office Worker")));
 
     }
 }

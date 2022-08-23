@@ -25,9 +25,9 @@ public class OccupationServiceTest {
     @Test
     void testOccupationService() throws OccupationException {
         when(occupationRepository.findAll()).thenReturn(List.of(
-                new Occupation(1, "NAVY"),
-                new Occupation(2, "OFFICE"),
-                new Occupation(3, "CONSTRUCTION")
+                new Occupation(1, "Navy"),
+                new Occupation(2, "Construction Worker"),
+                new Occupation(3, "Office Worker")
         ));
 
         List<Occupation> result = occupationService.getOccupations();
