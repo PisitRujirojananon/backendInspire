@@ -4,6 +4,8 @@ spring:
       ddl-auto: none
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/luckydb
-    username: admin
-    password: admin
+    url: jdbc:postgresql://localhost:5433/ProductMaster
+    hikari:
+      schema: ProductMaster
+    username: postgres
+    password: postgres
