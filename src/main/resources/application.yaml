@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ProductMaster
+    hikari:
+      schema: ProductMaster
+    username: postgres
+    password: postgres
