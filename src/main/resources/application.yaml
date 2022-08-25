@@ -1,11 +1,18 @@
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: none
-    show-sql: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#  datasource:
+#    url: jdbc:postgresql://localhost:5433/ProductMaster
+#    hikari:
+#      schema: ProductMaster
+#    username: postgres
+#    password: postgres
   datasource:
-    url: jdbc:postgresql://localhost:5433/ProductMaster
-    hikari:
-      schema: ProductMaster
-    username: postgres
-    password: postgres
+    url: jdbc:h2:~/test
+    driver-class-name: org.h2.Driver
+    username:
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
