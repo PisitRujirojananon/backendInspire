@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
+
 public class CustomerController {
 
     @Autowired
@@ -17,6 +20,22 @@ public class CustomerController {
 
     @PostMapping("/save")
     public CustomerResponse saveCustomerContact(@RequestBody CustomerRequest customerRequest) throws CustomerException {
+        if(customerRequest.getCustomername() == null){
+            throw CustomerException.requestNull();
+        }
+        if (customerRequest.getCustomergender() == null){
+            throw CustomerException.requestNull();
+        }
+        if (customerRequest.getCustomerbirthday() == null){
+            throw CustomerException.requestNull();
+        }
+        if (customerRequest.getCustomerphonenumber() == null){
+            throw CustomerException.requestNull();
+        }
+        if (customerRequest.getCustomeremail() == null){
+            throw CustomerException.requestNull();
+        }
+
         return customerService.saveCustomerContact(customerRequest);
     }
 }

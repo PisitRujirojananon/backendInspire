@@ -28,7 +28,7 @@ public class CustomerService {
             customer.setCustomerphonenumber(customerRequest.getCustomerphonenumber());
 
         Customer result = customerRepository.save(customer);
-        if(result.getCustomerbirthday() != null){
+        if(result.getCustomeremail() != null){
                 response.setStatus(HttpStatus.OK.value());
                 response.setMessage("Saved");
             return response;

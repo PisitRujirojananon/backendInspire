@@ -15,6 +15,5 @@ public class Config implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(false)
                 .maxAge(-1);
-//                .exposedHeaders("Authorization");
     }
 }
